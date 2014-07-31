@@ -1,42 +1,64 @@
 <div class="row">
   <!-- Not implemented on tutorial -->
   <div class="col-md-4">
-  <legend>Your Conversations</legend>
+    <div style="height: 300px; overflow-y: auto;">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Registered Users</div>
+
+        <!-- Table -->
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @users.each_with_index do |user, index| %>
+              <tr>
+                <td><%= index +=1 %></td>
+                <td><%= user.name %></td>
+                <td>
+                  <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                              "data-sid" => current_user.id, "data-rip" => user.id %>
+                </td>
+              </tr>
+          <% end %>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <hr>
+    <h3>Your Conversations</h3>
+    <% if @conversations.any? %>
+        <ul class="media-list">
+          <% @conversations.each do |conversation| %>
+              <li class="media">
+                <%= link_to image_tag("http://placehold.it/50x50", class: "media-object"), conversation_path(conversation),
+                            class: "pull-left" %>
+                <div class="media-body">
+                  <%= link_to conversation_path(conversation), class: "conversation", "data-cid" => conversation.id do %>
+                      <h4 class="media-heading"><%= conversation_interlocutor(conversation).name %></h4>
+
+                      <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
+                  <% end %>
+                </div>
+              </li>
+
+          <% end %>
+        </ul>
+    <% else %>
+        <p>You have no conversations. Click send message with any user to create one.</p>
+    <% end %>
 
   </div>
 
-  <div class="col-md-8">
-    <div class="panel panel-default">
-      <!-- Default panel contents -->
-      <div class="panel-heading">Registered Users</div>
-      <div class="panel-body">
-        <p>To start a new conversation with a user, click the send message button!</p>
-      </div>
+  <div class="col-md-4">
 
-      <!-- Table -->
-      <table class="table">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @users.each_with_index do |user, index| %>
-            <tr>
-              <td><%= index +=1 %></td>
-              <td><%= user.name %></td>
-              <td>
-                <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
-                            "data-sid" => current_user.id, "data-rip" => user.id %>
-              </td>
-            </tr>
-        <% end %>
-
-        </tbody>
-      </table>
-    </div>
   </div>
 
 </div>
