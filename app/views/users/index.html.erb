@@ -1,0 +1,42 @@
+<div class="row">
+  <!-- Not implemented on tutorial -->
+  <div class="col-md-4">
+  <legend>Your Conversations</legend>
+
+  </div>
+
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Registered Users</div>
+      <div class="panel-body">
+        <p>To start a new conversation with a user, click the send message button!</p>
+      </div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each_with_index do |user, index| %>
+            <tr>
+              <td><%= index +=1 %></td>
+              <td><%= user.name %></td>
+              <td>
+                <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                            "data-sid" => current_user.id, "data-rip" => user.id %>
+              </td>
+            </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
