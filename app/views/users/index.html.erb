@@ -40,14 +40,11 @@
           <ul class="media-list">
             <% @conversations.each do |conversation| %>
                 <li class="media">
-                  <%= link_to image_tag("http://placehold.it/50x50", class: "media-object"), conversation_path(conversation),
-                              class: "pull-left" %>
+                  <%= image_tag("http://placehold.it/50x50", class: "media-object pull-left") %>
                   <div class="media-body">
-                    <%= link_to conversation_path(conversation), class: "conversation", "data-cid" => conversation.id do %>
+                    <%= link_to "", conversation_path(conversation), class: "conversation", "data-cid" => conversation.id %>
                         <h4 class="media-heading"><%= conversation_interlocutor(conversation).name %></h4>
-
                         <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
-                    <% end %>
                   </div>
                 </li>
 
