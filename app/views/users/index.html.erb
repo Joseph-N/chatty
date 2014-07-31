@@ -34,26 +34,29 @@
     </div>
     <hr>
     <h3>Your Conversations</h3>
-    <% if @conversations.any? %>
-        <ul class="media-list">
-          <% @conversations.each do |conversation| %>
-              <li class="media">
-                <%= link_to image_tag("http://placehold.it/50x50", class: "media-object"), conversation_path(conversation),
-                            class: "pull-left" %>
-                <div class="media-body">
-                  <%= link_to conversation_path(conversation), class: "conversation", "data-cid" => conversation.id do %>
-                      <h4 class="media-heading"><%= conversation_interlocutor(conversation).name %></h4>
 
-                      <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
-                  <% end %>
-                </div>
-              </li>
+    <div style="height: 400px; overflow-y: auto;">
+      <% if @conversations.any? %>
+          <ul class="media-list">
+            <% @conversations.each do |conversation| %>
+                <li class="media">
+                  <%= link_to image_tag("http://placehold.it/50x50", class: "media-object"), conversation_path(conversation),
+                              class: "pull-left" %>
+                  <div class="media-body">
+                    <%= link_to conversation_path(conversation), class: "conversation", "data-cid" => conversation.id do %>
+                        <h4 class="media-heading"><%= conversation_interlocutor(conversation).name %></h4>
 
-          <% end %>
-        </ul>
-    <% else %>
-        <p>You have no conversations. Click send message with any user to create one.</p>
-    <% end %>
+                        <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
+                    <% end %>
+                  </div>
+                </li>
+
+            <% end %>
+          </ul>
+      <% else %>
+          <p>You have no conversations. Click send message with any user to create one.</p>
+      <% end %>
+    </div>
 
   </div>
 
