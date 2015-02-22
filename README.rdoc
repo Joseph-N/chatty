@@ -1,28 +1,7 @@
-== README
+== CHATTY
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Chatty is a Gmail like instant chat application implemented in rails using private_pub gem for near-realtime instant chat.
+Checkout the tutorial[http://josephndungu.com/tutorials/gmail-like-chat-application-in-ruby-on-rails] on how to go about implementing it from scratch.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+=== Contributing
+Feel free to clone the app, make improvements on it and submit a PR ;-)
