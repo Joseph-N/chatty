@@ -40,5 +40,23 @@
 </div>
 <audio id="chatAudio"><source src="/sounds/notification.mp3" type="audio/mpeg"></audio>
 </body>
+    <% if current_user %>
+    <script type="text/javascript">
+        channel = <%= raw ('"' + '/notifications' + current_user.id.to_s + '"') %>
+        PrivatePub.subscribe(channel, function(data) {
 
+        var sender_id = data.sid;
+        var recipient_id = data.rip;
+        var conversation_id = data.cid;
+
+
+        $.post("/conversations", { sender_id: sender_id, recipient_id: recipient_id }, function (data) {
+            chatBox.chatWith(conversation_id);
+        });
+
+        });
+    </script>
+    <%= subscribe_to "/notifications" + current_user.id.to_s %>
+    <% end %>
 </html>
+
